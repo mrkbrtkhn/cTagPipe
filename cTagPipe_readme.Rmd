@@ -1,0 +1,124 @@
+---
+title: "cTagePipe_readme"
+output: rmarkdown::github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## About cTagPipe
+
+This application aims at the identification of DNA sequences that allow the C-terminal tagging of endogenous loci in order to express fusion proteins. To achieve this, a combination of CRISPR/Cas9-mediated induction of DNA breaks and homologous recombination mediated repair with engineered repair templates is applied. 
+
+The application mainly works as a Shiny app but can be run from the R command line, too. The user selects the gene of interest and the pipeline calculates CRISPR guide RNAs, selects recombination templates and modifies/mutates the templates if required as such, that the guide RNAs will not be able to allow cutting of the recombined locus.
+
+ 
+## Installation
+
+Please install the latest version of R from <https://www.r-project.org>. On Ubuntu you will have to install a number of system packages in order to make the subsequent installation of R packages possible.
+
+```{sh message=FALSE, warning=FALSE, comment=FALSE,results='hide',eval=FALSE}
+sudo apt-get install libssl-dev
+sudo apt-get install libcurl4-openssl-dev
+sudo apt-get install libxml2-dev
+```
+
+In order to install this package, you require R's devtools:
+
+```{r message=FALSE, warning=FALSE, comment=FALSE,results='hide',eval=FALSE}
+listOfPackages <- c("devtools")
+newPackages <- listOfPackages[!(listOfPackages %in% installed.packages()[,"Package"])]
+if (length(newPackages)>0) {
+  source("https://bioconductor.org/biocLite.R")
+BiocInstaller::biocLite(newPackages)
+}
+
+```
+
+This enables you to install directly from GitHub repository:
+
+```{r message=FALSE, warning=FALSE, comment=FALSE,results='hide',eval=FALSE}
+library(devtools)
+install_github("mrkbrtkhn/cTagPipe")
+```
+
+Most likely this will produce a lot of errors. Dependencies are still a mess and I currently have no time to work on them. Please install them manually.
+
+
+## Running cTagPipe functionality:
+
+Assuming you have managed to install cTagPipe, the following code will start a Shiny server with the functionality as it is yet implemented:
+
+```{r warning=FALSE, comment=FALSE,results='hide',eval=FALSE}
+library(cTagPipeTest)
+
+distanceBetweenGuides <- 100
+recArmLength<-150
+removeAddGeneHits <- TRUE
+browserWindow<-200
+
+### target sequences
+seqs<-readDNAStringSet(system.file('extdata','rec_sequences.fa',package='cTagPipeTest'))
+
+mAID <- seqs$mAID
+tripleFlag<- seqs$triple_FLAG
+t2A<- seqs$t2A
+fiveP<- seqs$`5_prime_PITCH`
+threeP<- seqs$`3_prime_PITCH`
+neoM<- seqs$NeomycinR
+hygM<- seqs$HygromycinR
+
+
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+## Only run examples in interactive R sessions
+if (interactive()) {
+  
+  ui <- shiny::fluidPage(
+    shiny::pageWithSidebar(
+      shiny::headerPanel('C-terminal tagging pipeline'),
+      shiny::sidebarPanel(
+        shiny::selectInput('myGene', 'Transcript ID', c("NM_001304504","NM_153252","NM_001273",
+                                                        "NM_000237","NM_002106","NM_138635","NM_014660",
+                                                        "NM_175061","NM_030665","NM_005650","NM_001141969",
+                                                        "NM_003325","NM_003496","NM_014034","NM_020713",
+                                                        "NM_001203258","NM_004689","NM_006565","NM_080618",
+                                                        "NM_002875","NM_133487","NM_003883","NM_021975",
+                                                        "NM_001077700","NM_052927","NM_012308","NM_000937",
+                                                        "NM_001004456","NM_001278215",
+                                                        "NM_001077700")),
+        shiny::selectInput('myGenome', 'Genome', c("hg38")),
+        shiny::numericInput('winSize', 'Window Size', 100, min = 50, max = 150),
+        shiny::selectInput('myCassette', 'Rec. template', c("PITCH/homolgy_arm/AID/tripleFLAG/T2A/homolgy_arm/PITCH")),
+        shiny::actionButton('run', 'Run'),
+        width = 3
+      ),
+      
+      shiny::mainPanel(#width=800,
+        shiny::tabsetPanel(
+          shiny::tabPanel("Analysis report",shiny::verbatimTextOutput("testout")),
+          shiny::tabPanel("Plot", shiny::plotOutput("plot1")),
+          shiny::tabPanel("CCTop summary", DT::dataTableOutput("ccSumTable", width = 800)),
+          shiny::tabPanel("CCTop results", DT::dataTableOutput("ccbindTable", width = 800)),
+          shiny::tabPanel("Guide pairs", DT::dataTableOutput("pairwiseSelections", width = 800)),
+          shiny::tabPanel("Alignment test", msaR::msaROutput("msa", width="100%")),
+          shiny::tabPanel("Sequences", shiny::verbatimTextOutput("seqSummary")),
+          shiny::tabPanel("Mutation view guide 1", DT::dataTableOutput("mutView1", width = 1000)),
+          shiny::tabPanel("Mutation view guide 2", DT::dataTableOutput("mutView2", width = 1000))
+        )
+      )))
+  
+  shiny::shinyApp(ui, server)
+}
+```
+
+
+## Session Information
+
+```{r}
+sessionInfo()
+```
+
+<br><br>
+<br><br>
