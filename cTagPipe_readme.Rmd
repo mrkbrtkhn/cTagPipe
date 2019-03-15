@@ -23,7 +23,7 @@ sudo apt-get install libcurl4-openssl-dev
 sudo apt-get install libxml2-dev
 ```
 
-In order to install this package, you require R's devtools:
+In order to install this package, R's devtools package is required:
 
 ```{r message=FALSE, warning=FALSE, comment=FALSE,results='hide',eval=FALSE}
 listOfPackages <- c("devtools")
