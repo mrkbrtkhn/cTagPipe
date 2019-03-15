@@ -10,5 +10,5 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Imports: data.table
-Depends: RCurl,DT,msa,msaR,seqinr,rtracklayer,GenomicRanges,GenomicFeatures,shiny,Biostrings,org.Hs.eg.db,AnnotationDbi,Gviz
+Depends: RCurl,DT,msa,msaR,seqinr,rtracklayer,GenomicRanges,GenomicFeatures,shiny,Biostrings,org.Hs.eg.db,AnnotationDbi,Gviz,BSgenome.Hsapiens.UCSC.hg38
 RoxygenNote: 6.1.1.9000

@@ -1,6 +1,8 @@
 setwd("/Users/marek/JLUbox/Andreas/cTagPipe")
 library(roxygen2)
 library(devtools)
+#install_github("mrkbrtkhn/cTagPipe")#,quth_token="9a507f718f86527ae83afa61ffd62a367cb97ea7")
+
 #list.files()
 install("cTagPipeTest",reload = TRUE)
 
