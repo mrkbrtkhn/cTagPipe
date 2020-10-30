@@ -34,7 +34,7 @@ listOfPackages <- c("devtools")
 newPackages <- listOfPackages[!(listOfPackages %in% installed.packages()[,"Package"])]
 if (length(newPackages)>0) {
   source("https://bioconductor.org/biocLite.R")
-BiocInstaller::biocLite(newPackages)
+install.packages(newPackages)
 }
 ```
 
