@@ -71,7 +71,7 @@ myGene<-"NM_001077700" # MIER1
 myGene<-c("NM_000237") ### split stop gene
 myGene<-c("NM_001243526")  ### - strand split stop gene
 myGene<-c("NM_001243028") ## AKT2 big list test
-myGene<-c("NM_001077700") ## MIER1
+myGene<-c("NM_005349") ## RBPJ
 
 rfsq[sample(1:nrow(rfsq),100),]->myRfsq
 for (i in 1:nrow(myRfsq)) {
