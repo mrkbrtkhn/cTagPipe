@@ -1,6 +1,6 @@
 summarizeReport<-function(v) {
   print(paste("running summarizeReport function  ..."))
-  print(head(v))
+  print(head(v$data[[1]]))
   lapply(v$data,function(x) return(x[c(-7,-15,-16,-20)]))->ll
   #str(ll[[1]])
   as.data.frame(do.call(rbind,lapply(ll,unlist)))->sumReport
