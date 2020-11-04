@@ -2,7 +2,7 @@
 setwd("/home/marek/ccTop/")
 library(roxygen2)
 library(devtools)
-install_github("mrkbrtkhn/cTagPipe")
+install_github("mrkbrtkhn/cTagPipe",force=TRUE)
 
 #list.files()
 #install("cTagPipeTest",reload = TRUE)
