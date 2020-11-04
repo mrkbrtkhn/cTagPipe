@@ -91,7 +91,7 @@ if (interactive()) {
                                                         "NM_002875","NM_133487","NM_003883","NM_021975",
                                                         "NM_001077700","NM_052927","NM_012308","NM_000937",
                                                         "NM_001004456","NM_001278215",
-                                                        "NM_001077700")),
+                                                        "NM_001077700","NM_005349")),
         shiny::selectInput('myGenome', 'Genome', c("hg38")),
         shiny::numericInput('winSize', 'Window Size', 100, min = 50, max = 150),
         shiny::selectInput('myCassette', 'Rec. template', c("PITCH/homolgy_arm/AID/tripleFLAG/T2A/homolgy_arm/PITCH")),
