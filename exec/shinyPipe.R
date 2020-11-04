@@ -87,6 +87,7 @@
       
       shiny::withProgress(message = 'combining guides', value = 0.6, {
         combinedGuideAnalysis(sumReport,v)->gDat
+        print(1)
         gSelect <- gDat[!gDat$guidesOverlap,][1,]
         extractArmIntervals(gSelect,v,genRanges,input$myGenome)->armIntervals
         mutateSeqs(gSelect,v,genRanges,armIntervals)->armIntervals
@@ -151,7 +152,7 @@
                                                    "NM_003325","NM_003496","NM_014034","NM_020713",
                                                    "NM_001203258","NM_004689","NM_006565","NM_080618",
                                                    "NM_002875","NM_133487","NM_003883","NM_021975","NM_001077700",
-                                                   "NM_052927","NM_012308","NM_000937","NM_001004456")),
+                                                   "NM_052927","NM_012308","NM_000937","NM_001004456","NM_005349")),
           #textInput('myGene', 'Transcript ID', value = "", width = NULL, placeholder = NULL),
           shiny::selectInput('myGenome', 'Genome', c("hg38")),
           shiny::numericInput('winSize', 'Window Size', 100, min = 50, max = 150),

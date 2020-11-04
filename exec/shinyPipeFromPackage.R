@@ -1,5 +1,5 @@
 #setwd("/Users/marek/JLUbox/Andreas/cTagPipe")
-setwd("/home/marek/ccTop/cTagPipe/")
+setwd("/home/marek/ccTop/")
 library(roxygen2)
 library(devtools)
 install_github("mrkbrtkhn/cTagPipe")
