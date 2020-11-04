@@ -48,6 +48,10 @@ parseCCTopData<-function(cctopFile="test.xls") {
         }
         if (grepl("^Oligo fwd",sP[1])) {tList[["OligoFwd"]]<-sP[2]}
         if (grepl("^Oligo rev",sP[1])) {tList[["OligoRev"]]<-sP[2]}
+        #Oligo adding fwd Oligo adding rev
+        if (grepl("^Oligo adding fwd",sP[1])) {tList[["OligoFwd"]]<-sP[2]}
+        if (grepl("^Oligo adding rev",sP[1])) {tList[["OligoRev"]]<-sP[2]}
+        
         if (grepl("^Chromosome",sP[1])) {
           #print(tList[["name"]])
           expData<-TRUE
