@@ -1,5 +1,5 @@
 combinedGuideAnalysis <-function(sumReport,v) {
-  print("hallo")
+  print("hallola")
   print(head(sumReport))
   print("running function combinedGuideAnalysis ...")
   dt<-as.data.frame(t(combn(rownames(sumReport),2)))
