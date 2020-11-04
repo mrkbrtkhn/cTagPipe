@@ -1,5 +1,5 @@
 summarizeReport<-function(v) {
-  print(paste("running summarizeReport function ..."))
+  print(paste("running summarizeReport function  ..."))
   print(head(v))
   lapply(v$data,function(x) return(x[c(-7,-15,-16,-20)]))->ll
   #str(ll[[1]])
