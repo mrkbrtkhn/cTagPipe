@@ -70,7 +70,7 @@
 
         firstPassFilterCCResults(v)->v
         evaluateUpCCTop(v,mySymbol,genRanges,input$winSize,mGenIDMap)->v
-        save(v,"/home/marek/ccTop/v.RData")
+        save(v,file="/home/marek/ccTop/v.RData")
       })
 
       shiny::withProgress(message = 'calculating mutations', value = 0.5, {
