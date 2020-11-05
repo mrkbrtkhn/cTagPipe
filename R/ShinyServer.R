@@ -41,6 +41,8 @@ server<-function(input, output, session) {
 
     shiny::withProgress(message = 'calculating mutations', value = 0.5, {
       collectMutations(genRanges,v,input$myGenome)->v
+      save(v,file="/home/marek/ccTop/v.RData")
+
       summarizeReport(v)->sumReport
       ### clean up
       sumReport<-sumReport[as.logical(sumReport$hasHitinTarget) &
@@ -97,11 +99,11 @@ server<-function(input, output, session) {
                                             v$data[[as.character(gSelect[1,2])]]$seq,sep="")))
 
     output$msa <- renderMsaR(msaR("xx.aln", menu=F, overviewbox = F))
-    
-    output$mutView1 <- DT::renderDataTable(DT::datatable(annotMuts(genRanges,input$myGenome,v$data[[1]])), 
+
+    output$mutView1 <- DT::renderDataTable(DT::datatable(annotMuts(genRanges,input$myGenome,v$data[[1]])),
                                           options = list(scrollX='600px', scrollCollapse=TRUE), filter = 'top')
-    
-    output$mutView2 <- DT::renderDataTable(DT::datatable(annotMuts(genRanges,input$myGenome,v$data[[2]])), 
+
+    output$mutView2 <- DT::renderDataTable(DT::datatable(annotMuts(genRanges,input$myGenome,v$data[[2]])),
                                           options = list(scrollX='600px', scrollCollapse=TRUE), filter = 'top')
   })
   #output$testout<- renderText(c(is.character(input$myGene),is.character(input$myGenome),is.numeric(input$winSize)))
