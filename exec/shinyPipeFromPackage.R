@@ -32,7 +32,7 @@ library(cTagPipeTest)
   ## Only run examples in interactive R sessions
   if (interactive()) {
 
-    ui <- shiny: :fluidPage(
+    ui <- shiny::fluidPage(
       shiny::pageWithSidebar(
         shiny::headerPanel('C-terminal tagging pipeline'),
         shiny::sidebarPanel(
