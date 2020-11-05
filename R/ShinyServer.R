@@ -41,7 +41,7 @@ server<-function(input, output, session) {
 
     shiny::withProgress(message = 'calculating mutations', value = 0.5, {
       collectMutations(genRanges,v,input$myGenome)->v
-      save(v,file="/home/marek/ccTop/v.RData")
+      #save(v,file="/home/marek/ccTop/v.RData")
 
       summarizeReport(v)->sumReport
       ### clean up
