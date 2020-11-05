@@ -48,8 +48,7 @@
       shiny::withProgress(message = 'retrieving gene information', value = 0.15, {
         print("getting gene mappings!")
 
-        getM
-        appings(input$myGenome)->mGenIDMap
+        getMappings(input$myGenome)->mGenIDMap
         mapRefSeqToSymbol(input$myGene,mGenIDMap)->mySymbol
 
       })
