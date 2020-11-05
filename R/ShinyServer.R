@@ -45,10 +45,17 @@ server<-function(input, output, session) {
 
       summarizeReport(v)->sumReport
       ### clean up
+      #sumReport<-sumReport[as.logical(sumReport$hasHitinTarget) &
+      #                       (as.logical(unlist(sumReport$pamMutated)) | as.logical(unlist(sumReport$mutated)) | as.logical(unlist(sumReport$pamOverStop)))
+      #                     &ifelse(!is.na(sumReport$mintotalMMsExonic),as.numeric(as.character(sumReport$mintotalMMsExonic)),TRUE)
+      #                     ,]
       sumReport<-sumReport[as.logical(sumReport$hasHitinTarget) &
                              (as.logical(unlist(sumReport$pamMutated)) | as.logical(unlist(sumReport$mutated)) | as.logical(unlist(sumReport$pamOverStop)))
-                           &ifelse(!is.na(sumReport$mintotalMMsExonic),as.numeric(as.character(sumReport$mintotalMMsExonic)),TRUE)
+                           #& ifelse(!is.na(sumReport$mintotalMMsExonic),as.numeric(as.character(sumReport$mintotalMMsExonic)),TRUE)
+                           & !is.na(sumReport$mintotalMMsExonic)
                            ,]
+
+      ### map NCBI refseq NM to Symbols
       do.call(rbind,lapply(v$data,bindCCTop))->bindSumReport
 
     })
